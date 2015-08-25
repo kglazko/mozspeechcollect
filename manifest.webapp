@@ -1,0 +1,22 @@
+{
+  "name": "Mozspeech",
+  "description": "Mozspeech Benchmark",
+  "type" : "certified",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/img/icon.png",
+    "120": "/img/icon.png",
+    "512": "/img/icon.png"
+  },
+  "developer": {
+    "name": "Andre Natal",
+    "url": "http://your-homepage-here.org"
+  },
+  "default_locale": "en",
+   "permissions": {
+      "audio-capture" : {
+        "description" : "Audio capture"
+      }
+
+    }
+}
