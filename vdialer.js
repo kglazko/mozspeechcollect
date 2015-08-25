@@ -5,14 +5,7 @@ var recognizing = false;
 var final_transcript = "";
 var _stream;
 var mediaRecorder;
-
-var sr = new SpeechRecognition();
-sr.lang ="en-US";
-var sgl = new SpeechGrammarList();
-sgl.addFromString("#JSGF V1.0; grammar test;  <numeros> =  oh | 0  | 1 | 2 | 3 | 4 | 5 | 6 | 7 |  8 |  9 ; public <numbers> = <numeros>+; " ,1);
-sr. grammars = sgl;
-
-
+var sr;
 
 // Wait for connection to BinaryJS server
 client.on('open', function(){
@@ -55,29 +48,16 @@ function success_gum(stream){
   };
 }
 
-function sendVoice(e)
-{
+function sendVoice(e){
     randomnumber= +new Date();
     var stream = client.send(e.data, {name:  randomnumber + "audio.opus" , size: e.data.size});
     var stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
     console.log("streaming");
 }
 
-speakbtn.onclick = function ()
-{
-    recognizing = true;
-    say("Say this phone number:<br>");
-}
-
-agreebtn.onclick = function (){
-  localStorage.optin  = true;
-  checkoptin();
-}
-
 function onendspeak(number)
 {
-    if (!recognizing)
-    {
+    if (!recognizing){
         return;
     }
 
@@ -99,9 +79,7 @@ function onendspeak(number)
                 final_transcript += event.results[i][0].transcript;
             } 
         }
-
         changelabel("Thank you! <br> Press the microphone to say the next sequence.");
-
     };
 }
 
@@ -130,12 +108,35 @@ function changelabel(str){
 }
 
 
+function load(){
+    checkoptin();
+
+    speakbtn.onclick = function (){
+        recognizing = true;
+        say("Say this phone number:<br>");
+    }
+
+    agreebtn.onclick = function (){
+      localStorage.setItem("optin" , "1");;
+      checkoptin();
+    }
+
+    sr = new SpeechRecognition();
+    sr.lang ="en-US";
+    var sgl = new SpeechGrammarList();
+    sgl.addFromString("#JSGF V1.0; grammar test;  <numeros> =  oh | 0  | 1 | 2 | 3 | 4 | 5 | 6 | 7 |  8 |  9 ; public <numbers> = <numeros>+; " ,1);
+    sr. grammars = sgl;
+}
+
 function checkoptin(){
-    if (localStorage.optin){
+    if (localStorage.getItem("optin") == "1"){
         document.querySelector("#optincard").style.display = 'none';
         document.querySelector("#maindiv").style.display = 'block';
     }
 }
 
+document.body.onload = function () {
+      load();
+}
 
 
