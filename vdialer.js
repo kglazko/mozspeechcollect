@@ -57,10 +57,6 @@ function sendVoice(e){
 
 function onendspeak(number)
 {
-    if (!recognizing){
-        return;
-    }
-
     console.log('starting')
     sr.start(); // Validation of sr.grammars occurs here
     mediaRecorder.start();
@@ -84,6 +80,11 @@ function onendspeak(number)
 }
 
 function say(phrase,file){
+    if (recognizing){
+        return;
+    }
+
+    recognizing = true;
     var number = "(";
     for (i = 0; i<=9; i++){
         
@@ -112,7 +113,6 @@ function load(){
     checkoptin();
 
     speakbtn.onclick = function (){
-        recognizing = true;
         say("Say this phone number:<br>");
     }
 
@@ -136,7 +136,7 @@ function checkoptin(){
 }
 
 document.body.onload = function () {
-      load();
+    load();
 }
 
 
