@@ -43,7 +43,9 @@ function success_gum(stream){
 
   mediaRecorder.onstop = function()
   {
-      document.querySelector("#sendbtn").style.display = 'block';
+      document.querySelector("#divsendbtn").style.display = 'block';
+      document.querySelector("#sendbtn").value = "If you spoke correctly, touch this button";
+
       console.log('mediarecorder stopped');
   };
 }
@@ -53,6 +55,8 @@ function sendVoice(){
     var stream = client.send(eventmediarecorder.data, {name:  randomnumber + "audio.opus" , size: eventmediarecorder.data.size});
     var stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
     console.log("streaming");
+    document.querySelector("#sendbtn").value = "Thanks for the contribution!";
+    eventmediarecorder = null;
 }
 
 function onendspeak(number)
@@ -87,6 +91,8 @@ function say(phrase,file){
     if (recognizing){
         return;
     }
+    
+    document.querySelector("#divsendbtn").style.display = 'none';
 
     var number = "(";
     for (i = 0; i<=9; i++){
@@ -129,8 +135,9 @@ function load(){
       checkoptin();
     }
 
-    sendbtn.onclick = function (){
-        sendVoice();
+    divsendbtn.onclick = function (){
+        if (eventmediarecorder != null)
+         sendVoice();
     }
 
     sr = new SpeechRecognition();
