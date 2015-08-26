@@ -15,7 +15,8 @@ client.on('open', function(){
 
 // Wait for connection to BinaryJS server
 client.on('error', function(){
-    changelabel("Sorry, you are offline. Please, check your connection.");
+    changelabel("Sorry, you are offline. We'll try to reconnect, but please, check your connection.");
+    client = new BinaryClient('ws://speechan.cloudapp.net:9000');
 });
 
 navigator.mozGetUserMedia({audio: true},
