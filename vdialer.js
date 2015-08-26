@@ -60,8 +60,7 @@ function onendspeak(number)
     console.log('starting')
     sr.start(); // Validation of sr.grammars occurs here
     mediaRecorder.start();
-    sr.onresult = function(event)
-    {
+    sr.onresult = function(event){
         recognizing = false;
         mediaRecorder.stop(); 
         document.querySelector("#listening").style.display = 'none';
@@ -75,16 +74,20 @@ function onendspeak(number)
                 final_transcript += event.results[i][0].transcript;
             } 
         }
+
+        var e = document.createElement("audio");
+        e.src = "camcorder_end.opus";
+        e.setAttribute("autoplay", "true");
         changelabel("Thank you! <br> Press the microphone to say the next sequence.");
     };
 }
 
 function say(phrase,file){
+   
     if (recognizing){
         return;
     }
 
-    recognizing = true;
     var number = "(";
     for (i = 0; i<=9; i++){
         
@@ -96,10 +99,17 @@ function say(phrase,file){
 
     }
     phrase = phrase.concat(number);
-    changelabel(phrase);
-    document.querySelector("#listening").style.display = 'block';
-    document.querySelector("#fox").style.display = 'none';
-    onendspeak(number);
+
+    recognizing = true;
+    var e = document.createElement("audio");
+    e.src = "camcorder_start.opus";
+    e.setAttribute("autoplay", "true");
+    e.addEventListener("ended", function(){
+        changelabel(phrase);
+        document.querySelector("#listening").style.display = 'block';
+        document.querySelector("#fox").style.display = 'none';
+        onendspeak(number);
+    });
 }
 
 
