@@ -10,12 +10,12 @@ var eventmediarecorder;
 
 // Wait for connection to BinaryJS server
 client.on('open', function(){
-    changelabel("You are connected with our server. Please, push the microphone to start testing.");
+    changelabel("You are connected. Please, push the microphone to start testing.");
 });
 
 // Wait for connection to BinaryJS server
 client.on('error', function(){
-    changelabel("Sorry, we can't connect our server. Please check your connection.");
+    changelabel("Sorry, you are offline. Please, check your connection.");
 });
 
 navigator.mozGetUserMedia({audio: true},
@@ -41,11 +41,13 @@ function success_gum(stream){
         console.log('on error');
   };
 
-  mediaRecorder.onstop = function()
-  {
+  mediaRecorder.onstop = function() {
       document.querySelector("#divsendbtn").style.display = 'block';
       document.querySelector("#sendbtn").value = "If you spoke correctly, touch this button";
 
+      // hide mic and thanks text
+      document.querySelector("#mic").style.display = 'none';
+      document.querySelector("#lblstatus").style.display = 'none';
       console.log('mediarecorder stopped');
   };
 }
@@ -57,6 +59,15 @@ function sendVoice(){
     console.log("streaming");
     document.querySelector("#sendbtn").value = "Thanks for the contribution!";
     eventmediarecorder = null;
+
+    window.setTimeout(
+        function(){  
+            document.querySelector("#divsendbtn").style.display = 'none';
+            document.querySelector("#lblstatus").style.display = 'block';
+            document.querySelector("#fox").style.display = 'block';
+            document.querySelector("#mic").style.display = 'block';
+          }, 
+        1000);
 }
 
 function onendspeak(number)
@@ -82,7 +93,7 @@ function onendspeak(number)
         var e = document.createElement("audio");
         e.src = "camcorder_end.opus";
         e.setAttribute("autoplay", "true");
-        changelabel("Thank you! <br> Press the microphone to say the next sequence.");
+        changelabel("Thank you! <br> Tap the microphone to say the next sequence.");
     };
 }
 
@@ -135,7 +146,14 @@ function load(){
       checkoptin();
     }
 
-    divsendbtn.onclick = function (){
+    cancelbtn.onclick = function (){
+      document.querySelector("#divsendbtn").style.display = 'none';
+      document.querySelector("#mic").style.display = 'block';
+      document.querySelector("#lblstatus").style.display = 'block';
+
+    }
+
+    sendbtn.onclick = function (){
         if (eventmediarecorder != null)
          sendVoice();
     }
@@ -143,7 +161,7 @@ function load(){
     sr = new SpeechRecognition();
     sr.lang ="en-US";
     var sgl = new SpeechGrammarList();
-    sgl.addFromString("#JSGF V1.0; grammar test;  <numeros> =  oh | 0  | 1 | 2 | 3 | 4 | 5 | 6 | 7 |  8 |  9 ; public <numbers> = <numeros>+; " ,1);
+    sgl.addFromString("#JSGF V1.0; grammar test;  <numeros> =  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ; public <numbers> = <numeros>+; " ,1);
     sr. grammars = sgl;
 }
 
