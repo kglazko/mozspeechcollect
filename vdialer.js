@@ -7,15 +7,19 @@ var _stream;
 var mediaRecorder;
 var sr;
 var eventmediarecorder;
+var offline = true;
 
 // Wait for connection to BinaryJS server
 client.on('open', function(){
+    offline = false;
     changelabel("You are connected. Please, push the microphone to start testing.");
 });
 
 // Wait for connection to BinaryJS server
 client.on('error', function(){
+    offline = true;
     changelabel("Sorry, you are offline. Please, restart the application.");
+    alert("You got disconnected. Please, restart the appplication.");
 });
 
 navigator.mozGetUserMedia({audio: true},
@@ -53,10 +57,17 @@ function success_gum(stream){
 }
 
 function sendVoice(){
-    randomnumber= +new Date();
-    var stream = client.send(eventmediarecorder.data, {name:  randomnumber + "audio.opus" , size: eventmediarecorder.data.size});
-    var stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
-    console.log("streaming");
+    try {
+        randomnumber= +new Date();
+        var stream = client.send(eventmediarecorder.data, {name:  randomnumber + "audio.opus" , size: eventmediarecorder.data.size});
+        var stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
+        console.log("streaming");
+    } 
+    catch (err) {
+        alert("You got disconnected. Please, restart the appplication.");
+        return;
+    }
+
     document.querySelector("#sendbtn").value = "Thanks for the contribution!";
     eventmediarecorder = null;
 
@@ -138,7 +149,11 @@ function load(){
     checkoptin();
 
     speakbtn.onclick = function (){
-        say("Say this phone number:<br>");
+
+        if (offline)
+            alert("You got disconnected. Please, restart the appplication.");
+        else
+            say("Say this phone number:<br>");
     }
 
     agreebtn.onclick = function (){
@@ -150,7 +165,6 @@ function load(){
       document.querySelector("#divsendbtn").style.display = 'none';
       document.querySelector("#mic").style.display = 'block';
       document.querySelector("#lblstatus").style.display = 'block';
-
     }
 
     sendbtn.onclick = function (){
