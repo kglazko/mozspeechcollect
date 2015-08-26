@@ -43,7 +43,7 @@ function success_gum(stream){
 
   mediaRecorder.onstop = function() {
       document.querySelector("#divsendbtn").style.display = 'block';
-      document.querySelector("#sendbtn").value = "If you spoke correctly, touch this button";
+      document.querySelector("#sendbtn").value = "Submit";
 
       // hide mic and thanks text
       document.querySelector("#mic").style.display = 'none';
