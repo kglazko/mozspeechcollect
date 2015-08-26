@@ -102,8 +102,7 @@ body{
   overflow:hidden;
 }
 
-.maindiv
-{
+.maindiv {
   text-align:center;
   width:100vw;
   height:100vh;   
@@ -111,8 +110,7 @@ body{
   display:none;
 }
 
-.speak
-{
+.speak {
   position: absolute; 
   bottom: 0;  
   margin-left: -45px;
@@ -134,7 +132,7 @@ body{
   font-size: medium;
 }
 
-#agreebtn {
+.agreebtn {
    border: 1px green;
    background-color: lightGreen;
    height:50px;
@@ -142,5 +140,7 @@ body{
    font-size: large;
 }
 
-
+#sendbtn{
+  display: none;
+}
 

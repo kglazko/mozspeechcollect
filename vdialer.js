@@ -6,6 +6,7 @@ var final_transcript = "";
 var _stream;
 var mediaRecorder;
 var sr;
+var eventmediarecorder;
 
 // Wait for connection to BinaryJS server
 client.on('open', function(){
@@ -14,7 +15,7 @@ client.on('open', function(){
 
 // Wait for connection to BinaryJS server
 client.on('error', function(){
-    changelabel("Sorry, we can't connect you with our server. Please check your connection.");
+    changelabel("Sorry, we can't connect our server. Please check your connection.");
 });
 
 navigator.mozGetUserMedia({audio: true},
@@ -34,23 +35,22 @@ navigator.mozGetUserMedia({audio: true},
 function success_gum(stream){
     mediaRecorder = new MediaRecorder(stream);
     mediaRecorder.ondataavailable = function(e) {
-        sendVoice(e);
-        //wsstream = client.send(e.data, {name: "audio", size: e.data.size});
+        eventmediarecorder = e;
   };
   mediaRecorder.onerror = function(e){
         console.log('on error');
-
   };
 
   mediaRecorder.onstop = function()
   {
+      document.querySelector("#sendbtn").style.display = 'block';
       console.log('mediarecorder stopped');
   };
 }
 
-function sendVoice(e){
+function sendVoice(){
     randomnumber= +new Date();
-    var stream = client.send(e.data, {name:  randomnumber + "audio.opus" , size: e.data.size});
+    var stream = client.send(eventmediarecorder.data, {name:  randomnumber + "audio.opus" , size: eventmediarecorder.data.size});
     var stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
     console.log("streaming");
 }
@@ -112,12 +112,10 @@ function say(phrase,file){
     });
 }
 
-
 function changelabel(str){
     document.querySelector("#lblstatus").style.display = 'block';
     document.querySelector("#lblstatus").innerHTML = str;
 }
-
 
 function load(){
     checkoptin();
@@ -129,6 +127,10 @@ function load(){
     agreebtn.onclick = function (){
       localStorage.setItem("optin" , "1");;
       checkoptin();
+    }
+
+    sendbtn.onclick = function (){
+        sendVoice();
     }
 
     sr = new SpeechRecognition();
