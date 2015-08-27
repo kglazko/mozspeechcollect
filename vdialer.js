@@ -8,7 +8,8 @@ var mediaRecorder;
 var sr;
 var eventmediarecorder;
 var offline = true;
-
+var global_phrase;
+var str_grm = "#JSGF V1.0; grammar test;  <numeros> =  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ; public <numbers> = <numeros>+;"
 // Wait for connection to BinaryJS server
 client.on('open', function(){
     offline = false;
@@ -60,7 +61,10 @@ function sendVoice(){
     try {
         randomnumber= +new Date();
         var stream = client.send(eventmediarecorder.data, {name:  randomnumber + "audio.opus" , size: eventmediarecorder.data.size});
-        var stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
+        stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
+        stream = client.send(global_phrase, {name: randomnumber + "word.txt", size: global_phrase.length});
+        stream = client.send(str_grm, {name: randomnumber + "grm.txt", size: str_grm.length});
+
         console.log("streaming");
     } 
     catch (err) {
@@ -127,6 +131,7 @@ function say(phrase,file){
 
     }
     phrase = phrase.concat(number);
+    global_phrase = number;
 
     recognizing = true;
     var e = document.createElement("audio");
@@ -175,7 +180,7 @@ function load(){
     sr = new SpeechRecognition();
     sr.lang ="en-US";
     var sgl = new SpeechGrammarList();
-    sgl.addFromString("#JSGF V1.0; grammar test;  <numeros> =  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ; public <numbers> = <numeros>+; " ,1);
+    sgl.addFromString(str_grm ,1);
     sr. grammars = sgl;
 }
 
