@@ -1,6 +1,5 @@
 {
   "name": "mozspeechserver",
-  "version": "0.1",
   "description": "Moz speech server",
   "scripts": {
     "start": "node server.js"
