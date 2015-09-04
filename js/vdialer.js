@@ -4,12 +4,15 @@ var sayaudio = document.querySelector("#say");
 var recognizing = false;
 var final_transcript = "";
 var _stream;
-var mediaRecorder;
 var sr;
-var eventmediarecorder;
 var offline = true;
 var global_phrase;
+var audio_context = new AudioContext;
+var recorder;
 var str_grm = "#JSGF V1.0; grammar test;  <numeros> =  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ; public <numbers> = <numeros>+;"
+var blob = null;
+localStorage.setItem("totalsamples", 0 );
+
 // Wait for connection to BinaryJS server
 client.on('open', function(){
     offline = false;
@@ -38,42 +41,31 @@ navigator.mozGetUserMedia({audio: true},
 );
 
 function success_gum(stream){
-    mediaRecorder = new MediaRecorder(stream);
-    mediaRecorder.ondataavailable = function(e) {
-        eventmediarecorder = e;
-  };
-  mediaRecorder.onerror = function(e){
-        console.log('on error');
-  };
-
-  mediaRecorder.onstop = function() {
-      document.querySelector("#divsendbtn").style.display = 'block';
-      document.querySelector("#sendbtn").value = "Submit";
-
-      // hide mic and thanks text
-      document.querySelector("#mic").style.display = 'none';
-      document.querySelector("#lblstatus").style.display = 'none';
-      console.log('mediarecorder stopped');
-  };
+    var input = audio_context.createMediaStreamSource(stream);
+    console.log('Media stream created.');
+    recorder = new Recorder(input);
 }
 
 function sendVoice(){
     try {
         randomnumber= +new Date();
-        var stream = client.send(eventmediarecorder.data, {name:  randomnumber + "audio.opus" , size: eventmediarecorder.data.size});
+        var stream = client.send(blob, {name:  randomnumber + "audio.wav" , size: blob.size});
         stream = client.send(final_transcript, {name: randomnumber + "asr.txt", size: final_transcript.length});
         stream = client.send(global_phrase, {name: randomnumber + "word.txt", size: global_phrase.length});
         stream = client.send(str_grm, {name: randomnumber + "grm.txt", size: str_grm.length});
 
         console.log("streaming");
+
+        document.querySelector("#sendbtn").value = "Thanks for the contribution!";
+        blob = null;
+        localStorage.setItem("totalsamples" , (+localStorage.getItem("totalsamples"))+1 );
+
     } 
     catch (err) {
         alert("You have disconnected. Please, restart the appplication.");
         return;
     }
 
-    document.querySelector("#sendbtn").value = "Thanks for the contribution!";
-    eventmediarecorder = null;
 
     window.setTimeout(
         function(){  
@@ -85,14 +77,44 @@ function sendVoice(){
         1000);
 }
 
+function startRecording() {
+    recorder && recorder.record();
+    console.log('Recording...');
+}
+
+function stopRecording(button) {
+    recorder && recorder.stop();
+    console.log('Stopped recording.');
+    // create WAV download link using audio data blob
+    createUploadLink();
+    recorder.clear();
+}
+
+
+function createUploadLink() {
+    recorder && recorder.exportWAV(function(_blob) {
+      blob  = _blob;
+      document.querySelector("#divsendbtn").style.display = 'block';
+      document.querySelector("#sendbtn").value = "Submit";
+
+      // hide mic and thanks text
+      document.querySelector("#mic").style.display = 'none';
+      document.querySelector("#lblstatus").style.display = 'none';
+      console.log('mediarecorder stopped');
+      document.querySelector("#msgsamples").innerHTML = "You contributed with "+localStorage.getItem("totalsamples") +" samples so far!";
+
+    });
+}
+
+
 function onendspeak(number)
 {
     console.log('starting')
     sr.start(); // Validation of sr.grammars occurs here
-    mediaRecorder.start();
+    startRecording();
     sr.onresult = function(event){
         recognizing = false;
-        mediaRecorder.stop(); 
+        stopRecording();
         document.querySelector("#listening").style.display = 'none';
         document.querySelector("#fox").style.display = 'block';
 
@@ -173,7 +195,7 @@ function load(){
     }
 
     sendbtn.onclick = function (){
-        if (eventmediarecorder != null)
+        if (blob != null)
          sendVoice();
     }
 

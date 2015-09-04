@@ -6,7 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="binary.js"></script>
+  <script src="js/binary.js"></script>
+  <script src="js/recorder.js"></script>
+  <script src="js/recorderWorker.js"></script>
 </head>
 <body>
 
@@ -41,11 +43,12 @@
 
   <div style="left:30px; display:block;font-style: italic ; font-weight: normal; font-size: 1.6rem; text-align:center; width:80%; position:absolute;bottom:200px;" id="lblstatus">Please, wait. We're connecting...</div>
   <br>
-    <div id="divsendbtn"> <center> <p><h2>If you spoke correctly, press submit to send to the server. </h2></p>  <input type="button" id="sendbtn" style="width:350px" value="Touch this button if you spoke correctly" class="agreebtn"/><br><br><input type="button" id="cancelbtn" style="width:350px" value="Or touch here to speak again" class="agreebtn"/></center></div><br>
+    <div id="divsendbtn"> <center> <p><h2>If you spoke correctly, press submit to send to the server. </h2></p>  <input type="button" id="sendbtn" style="width:350px" value="Touch this button if you spoke correctly" class="agreebtn"/><br><br><input type="button" id="cancelbtn" style="width:350px" value="Or touch here to speak again" class="agreebtn"/></center> <br><div style="font-size: medium" id="msgsamples"></div></div><br>
   <div id="mic" style="width:100%;display:block">
      <img id="speak" class="speak" src="img/mic.png"/>
   </div>
 </div>
-  <script src="vdialer.js" type="text/javascript" >  </script>
+  <script src="recorder.js"></script>
+  <script src="js/vdialer.js" type="text/javascript" >  </script>
 </body>
 </html>
