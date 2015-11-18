@@ -23,7 +23,7 @@ client.on('open', function(){
 client.on('error', function(){
     offline = true;
     changelabel("Sorry, you are offline. Please, restart the application.");
-    alert("You have disconnected. Please, restart the appplication.");
+    alert("You have disconnected. Please, restart the application.");
 });
 
 navigator.mozGetUserMedia({audio: true},
@@ -62,7 +62,7 @@ function sendVoice(){
 
     } 
     catch (err) {
-        alert("You have disconnected. Please, restart the appplication.");
+        alert("You have disconnected. Please, restart the application.");
         return;
     }
 
@@ -178,7 +178,7 @@ function load(){
     speakbtn.onclick = function (){
 
         if (offline)
-            alert("You have disconnected. Please, restart the appplication.");
+            alert("You have disconnected. Please, restart the application.");
         else
             say("Say this phone number:<br>");
     }
