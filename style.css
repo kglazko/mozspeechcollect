@@ -15,7 +15,7 @@
   animation-duration: 3s;
   animation-direction: normal;
   border-top: 15px solid transparent;
-  border-left: 15px solid blue;
+  border-left: 15px solid #0096dd;
   border-bottom: 15px solid transparent;
 
 }
@@ -56,7 +56,7 @@
   animation-duration: 3s;
   animation-direction: normal;
   border-top: 15px solid transparent;
-  border-right: 15px solid blue;
+  border-right: 15px solid #0096dd;
   border-bottom: 15px solid transparent;
 
 }
@@ -66,7 +66,7 @@
   height: 8px;
   border-radius: 50%;
   position: absolute;
-  background-color: blue;
+  background-color: #0096dd;
   top:161px;
   left:206px;
   margin-left: -50px;
@@ -105,7 +105,7 @@ body{
 .maindiv {
   text-align:center;
   width:100vw;
-  height:100vh;   
+  height:80vh;
   position:relative;
   display:none;
 }
@@ -151,6 +151,7 @@ body{
 
 #fox {
   background: #c13832;
+  border-bottom: 5px solid white;
 }
 
 #logo {

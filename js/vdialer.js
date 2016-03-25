@@ -1,10 +1,10 @@
-var client = new BinaryClient('ws://speechan.cloudapp.net:9000');
+var client = new BinaryClient('ws://localhost:9000');
 var speakbtn = document.querySelector("#speak");
 var sayaudio = document.querySelector("#say");
 var recognizing = false;
 var final_transcript = "";
 var _stream;
-var sr;
+//var sr;
 var offline = true;
 var global_phrase;
 var audio_context = new AudioContext;
@@ -110,11 +110,11 @@ function createUploadLink() {
 function onendspeak(number)
 {
     console.log('starting')
-    sr.start(); // Validation of sr.grammars occurs here
+    //sr.start(); // Validation of sr.grammars occurs here
     startRecording();
-    sr.onresult = function(event){
+    //sr.onresult = function(event){
+        document.getElementById("mic").addEventListener("click", stopRecording);
         recognizing = false;
-        stopRecording();
         document.querySelector("#listening").style.display = 'none';
         document.querySelector("#fox").style.display = 'block';
 
@@ -131,7 +131,7 @@ function onendspeak(number)
         e.src = "camcorder_end.opus";
         e.setAttribute("autoplay", "true");
         changelabel("Thank you! <br> Tap the microphone to say the next sequence.");
-    };
+    //};
 }
 
 function say(phrase,file){
@@ -162,7 +162,6 @@ function say(phrase,file){
     e.addEventListener("ended", function(){
         changelabel(phrase);
         document.querySelector("#listening").style.display = 'block';
-        document.querySelector("#fox").style.display = 'none';
         onendspeak(number);
     });
 }
@@ -199,11 +198,11 @@ function load(){
          sendVoice();
     }
 
-    sr = new SpeechRecognition();
+    /**sr = new SpeechRecognition();
     sr.lang ="en-US";
     var sgl = new SpeechGrammarList();
     sgl.addFromString(str_grm ,1);
-    sr. grammars = sgl;
+    sr. grammars = sgl;**/
 }
 
 function checkoptin(){
