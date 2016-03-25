@@ -142,18 +142,18 @@ function say(phrase,file){
     
     document.querySelector("#divsendbtn").style.display = 'none';
 
-    var number = "(";
+   /** var number = "(";
     for (i = 0; i<=9; i++){
         
         if (i == 3)
             number = number.concat(") ")
         
         var rnd = Math.random().toString().substring(2,3);
-        var number = number.concat( rnd );
+        var number = number.concat( rnd ); 
 
-    }
-    phrase = phrase.concat(number);
-    global_phrase = number;
+    }**/
+    phrase = phrase.concat("Hey Vaani");
+    global_phrase = "Hey Vaani";
 
     recognizing = true;
     var e = document.createElement("audio");
@@ -162,7 +162,7 @@ function say(phrase,file){
     e.addEventListener("ended", function(){
         changelabel(phrase);
         document.querySelector("#listening").style.display = 'block';
-        onendspeak(number);
+        onendspeak("Hey Vaani");
     });
 }
 
@@ -179,7 +179,7 @@ function load(){
         if (offline)
             alert("You have disconnected. Please, restart the application.");
         else
-            say("Say this phone number:<br>");
+            say("Say this phrase:<br>");
     }
 
     agreebtn.onclick = function (){
