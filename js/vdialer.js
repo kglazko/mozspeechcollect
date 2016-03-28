@@ -5,6 +5,7 @@ var recognizing = false;
 var final_transcript = "";
 var _stream;
 //var sr;
+var recording_state = 0;
 var offline = true;
 var global_phrase;
 var audio_context = new AudioContext;
@@ -87,6 +88,7 @@ function stopRecording(button) {
     console.log('Stopped recording.');
     // create WAV download link using audio data blob
     createUploadLink();
+    recording_state = 0;
     recorder.clear();
 }
 
@@ -113,7 +115,7 @@ function onendspeak(number)
     //sr.start(); // Validation of sr.grammars occurs here
     startRecording();
     //sr.onresult = function(event){
-        document.getElementById("mic").addEventListener("click", stopRecording);
+        //document.getElementById("mic").addEventListener("click", stopRecording);
         recognizing = false;
         document.querySelector("#listening").style.display = 'none';
         document.querySelector("#fox").style.display = 'block';
@@ -136,7 +138,8 @@ function onendspeak(number)
 }
 
 function say(phrase,file){
-   
+
+   recording_state = 1;
     if (recognizing){
         return;
     }
@@ -180,9 +183,13 @@ function load(){
         if (offline)
             alert("You have disconnected. Please, restart the application.");
         else
-            //if (document.querySelector("#divsendbtn").style.display == 'none') {
+            if (recording_state == 0) {
                 say("Say this phrase:<br>");
-           // }
+            }
+
+            else if (recording_state == 1) {
+                stopRecording();
+            }
             
     }
 
@@ -195,6 +202,8 @@ function load(){
       document.querySelector("#divsendbtn").style.display = 'none';
       document.querySelector("#mic").style.display = 'block';
       document.querySelector("#lblstatus").style.display = 'block';
+      //STATE MACHINE RECORDING IS EQUAL TO NOT RECORDING
+      //RENDER MIC, RENDER VAANI, ETC.
     }
 
     sendbtn.onclick = function (){
