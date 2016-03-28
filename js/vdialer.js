@@ -117,6 +117,7 @@ function onendspeak(number)
         recognizing = false;
         document.querySelector("#listening").style.display = 'none';
         document.querySelector("#fox").style.display = 'block';
+        document.querySelector("#lblstatus").style.display='none';
 
         final_transcript = '';
         // Assemble the transcript from the array of results
@@ -179,7 +180,10 @@ function load(){
         if (offline)
             alert("You have disconnected. Please, restart the application.");
         else
-            say("Say this phrase:<br>");
+            //if (document.querySelector("#divsendbtn").style.display == 'none') {
+                say("Say this phrase:<br>");
+           // }
+            
     }
 
     agreebtn.onclick = function (){
