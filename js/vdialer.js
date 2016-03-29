@@ -71,6 +71,7 @@ function sendVoice(){
     window.setTimeout(
         function(){  
             document.querySelector("#divsendbtn").style.display = 'none';
+            changelabel("Please press the microphone to record.");
             document.querySelector("#lblstatus").style.display = 'block';
             document.querySelector("#fox").style.display = 'block';
             document.querySelector("#mic").style.display = 'block';
@@ -145,6 +146,7 @@ function say(phrase,file){
     }
     
     document.querySelector("#divsendbtn").style.display = 'none';
+    //changelabel("Please tap on the microphone to record.");
 
    /** var number = "(";
     for (i = 0; i<=9; i++){
