@@ -43,7 +43,7 @@
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  position: absolute;
+  position:absolute;
   background-color: transparent;
   -webkit-animation-name: anir; 
   -webkit-animation-iteration-count: infinite;
@@ -67,8 +67,8 @@
   border-radius: 50%;
   position: absolute;
   background-color: #0096dd;
-  top:161px;
-  left:206px;
+  top:161px;**/
+  left:206px;**/
   margin-left: -50px;
 }
 
@@ -97,7 +97,7 @@ html{
 body{
   margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;
   padding: 0;
-  color: black; font-size: 10pt; font-family: "Trebuchet MS", sans-serif;
+  color: black; font-size: 10pt; font-family: "Open Sans Light", sans-serif;
   background-color: #B7BAD6;
   overflow:hidden;
 }
@@ -110,11 +110,19 @@ body{
   display:none;
 }
 
-.speak {
-  position: absolute; 
-  bottom: 0; 
-  margin-left: -45px;
-  padding-bottom: 10px;
+.speak { 
+}
+
+.recording {
+    border: 10px solid blue;
+    border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+
+}
+
+.not-recording {
+  border: none;
 }
 
 .optincard {
@@ -156,6 +164,13 @@ body{
 
 #logo {
   padding-bottom: 15px;
+}
+
+#mic {
+    position: absolute; 
+    bottom: 0; 
+    margin-left: -45px;
+    padding-bottom: 10px;
 }
 
 

@@ -80,12 +80,16 @@ function sendVoice(){
 }
 
 function startRecording() {
+    document.querySelector("#listening").style.display = 'block';
+    document.querySelector("#speak").className = 'recording';
     recorder && recorder.record();
     console.log('Recording...');
 }
 
 function stopRecording(button) {
     recorder && recorder.stop();
+    document.querySelector("#listening").style.display = 'none';
+    document.querySelector("#speak").className = 'not-recording';
     console.log('Stopped recording.');
     // create WAV download link using audio data blob
     createUploadLink();
@@ -118,7 +122,7 @@ function onendspeak(number)
     //sr.onresult = function(event){
         //document.getElementById("mic").addEventListener("click", stopRecording);
         recognizing = false;
-        document.querySelector("#listening").style.display = 'none';
+        //document.querySelector("#listening").style.display = 'none';
         document.querySelector("#fox").style.display = 'block';
         //document.querySelector("#lblstatus").style.display='none';
 
