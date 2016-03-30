@@ -81,6 +81,7 @@ function sendVoice(){
 
 function startRecording() {
     document.querySelector("#listening").style.display = 'block';
+    document.querySelector("#clicktostop").style.display='block';
     document.querySelector("#speak").className = 'recording';
     recorder && recorder.record();
     console.log('Recording...');
@@ -89,6 +90,7 @@ function startRecording() {
 function stopRecording(button) {
     recorder && recorder.stop();
     document.querySelector("#listening").style.display = 'none';
+    document.querySelector("#clicktostop").style.display='none';
     document.querySelector("#speak").className = 'not-recording';
     console.log('Stopped recording.');
     // create WAV download link using audio data blob
