@@ -15,7 +15,7 @@
   animation-duration: 3s;
   animation-direction: normal;
   border-top: 15px solid transparent;
-  border-left: 15px solid rgba(0,150,221,0.3);
+  border-left: 15px solid rgba(255,255,255,0.4);
   border-bottom: 15px solid transparent;
   z-index:2;
 
@@ -57,7 +57,7 @@
   animation-duration: 3s;
   animation-direction: normal;
   border-top: 15px solid transparent;
-  border-right: 15px solid rgba(0,150,221,0.3);
+  border-right: 15px solid rgba(255,255,255,0.4);
   border-bottom: 15px solid transparent;
 
 }
