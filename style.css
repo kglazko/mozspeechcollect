@@ -15,8 +15,9 @@
   animation-duration: 3s;
   animation-direction: normal;
   border-top: 15px solid transparent;
-  border-left: 15px solid #0096dd;
+  border-left: 15px solid rgba(0,150,221,0.3);
   border-bottom: 15px solid transparent;
+  z-index:2;
 
 }
 
@@ -56,7 +57,7 @@
   animation-duration: 3s;
   animation-direction: normal;
   border-top: 15px solid transparent;
-  border-right: 15px solid #0096dd;
+  border-right: 15px solid rgba(0,150,221,0.3);
   border-bottom: 15px solid transparent;
 
 }
@@ -106,11 +107,13 @@ body{
   text-align:center;
   width:100vw;
   height:80vh;
-  position:relative;
+  position:absolute;
   display:none;
 }
 
-.speak { 
+#speak { 
+      z-index:5;
+      position:relative;
 }
 
 @keyframes animateBorder {
@@ -121,6 +124,8 @@ body{
 }
 
 .recording {
+        z-index:5;
+      position:relative;
     border: 10px solid #4195fc;
     border-radius: 150px;
   -webkit-border-radius: 150px;
@@ -135,6 +140,8 @@ body{
 
 .not-recording {
   border: none;
+  z-index:5;
+  position:relative;
 }
 
 .optincard {
@@ -180,9 +187,22 @@ body{
 
 #mic {
     position: absolute; 
-    bottom: 0; 
-    margin-left: -45px;
+    bottom: 20%; 
     padding-bottom: 10px;
+}
+
+#msgsamples {
+  padding-top: 10px;
+}
+
+#lblstatus {
+  background-color: white;
+  padding-top:20px;
+  padding-bottom:20px;
+  width:100%;
+  padding-right:20px;
+  padding-left:20px;
+  top:30px;
 }
 
 

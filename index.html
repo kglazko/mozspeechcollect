@@ -23,27 +23,26 @@
   </div>
 <div id="maindiv" class='maindiv'>
 
-  <div style="left:30px; display:block;font-style: italic ; font-weight: normal; font-size: 1.6rem; text-align:center; width:80%; position:absolute;bottom:200px;" id="lblstatus">Please, wait. We're connecting...</div>
+  <center><div style="display:block;font-style: italic ; font-weight: normal; font-size: 1.6rem; text-align:center; position:relative;" id="lblstatus">Please, wait. We're connecting...</div></center>
   <br>
     <div id="divsendbtn"> <center> <p><h2>If you spoke correctly, press submit to send to the server. </h2></p>  <input type="button" id="sendbtn" style="width:350px" value="Touch this button if you spoke correctly" class="agreebtn"/><br><br><input type="button" id="cancelbtn" style="width:350px" value="Or touch here to speak again" class="agreebtn"/></center> <div style="font-size: medium" id="msgsamples"></div></div><br>
   <div id="mic" style="width:100%;display:block">
-  <img id="speak" src="img/mic.png"/>
-    <div id="listening" style="display:none; position:relative">
-    <div style="width:400px;margin:auto;position:relative;display:block" id="ringdiv1" >
-    <div id="r1" class="ring"></div>
+  <center><img id="speak" src="img/mic.png"/></center>
+    <center><div id="listening" style="display:none; position:relative;top:-220px;left:5%">
+    <div style="width:400px;margin:auto;position:relative;display:block;z-index:2" id="ringdiv1" >
+
     <div id="r2" class="ring"></div>
     <div id="r3" class="ring"></div>
     <div id="r4" class="ring"></div>
     </div>
 
-    <div style="width:400px;margin:auto;position:relative;display:block" id="ringdiv2">
-    <div class="sbringr"></div>
-    <div id="r1" class="ringr"></div>
+    <div style="width:400px;margin:auto;position:relative;display:block;z-index:2" id="ringdiv2">
+
     <div id="r2r" class="ringr"></div>
     <div id="r3r" class="ringr"></div>
     <div id="r4r" class="ringr"></div>
     </div>
-  </div>
+  </div></center>
   </div>
 </div>
   <script src="recorder.js"></script>
