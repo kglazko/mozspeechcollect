@@ -1,0 +1,212 @@
+.ring {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: transparent;
+  -webkit-animation-name: ani; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-direction: normal;
+  animation-name: ani; 
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 3s;
+  animation-direction: normal;
+  border-top: 15px solid transparent;
+  border-left: 15px solid rgba(255,255,255,0.4);
+  border-bottom: 15px solid transparent;
+  z-index:2;
+
+}
+
+
+@-webkit-keyframes ani {
+0% {-webkit-transform: scale(0.01); opacity: 0} 
+1% {-webkit-transform: scale(0.01); opacity: 0.8} 
+95% {-webkit-transform: scale(1); opacity: 0.8;}
+100% {-webkit-transform: scale(1); opacity: 0;}
+}
+
+@keyframes ani {
+0% {transform: scale(0.01); opacity: 0} 
+1% {transform: scale(0.01); opacity: 0.8} 
+95% {transform: scale(1); opacity: 0.8;}
+100% {transform: scale(1); opacity: 0;}
+}
+
+#r2 { -webkit-animation-delay: -1s;animation-delay: -1s;}
+#r3 { -webkit-animation-delay: -2s;animation-delay: -2s;}
+#r4 { -webkit-animation-delay: -3s;animation-delay: -3s;}
+
+.ringr {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  position:absolute;
+  background-color: transparent;
+  -webkit-animation-name: anir; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 3s;
+  -webkit-animation-direction: normal;
+  animation-name: anir; 
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 3s;
+  animation-direction: normal;
+  border-top: 15px solid transparent;
+  border-right: 15px solid rgba(255,255,255,0.4);
+  border-bottom: 15px solid transparent;
+
+}
+
+.sbringr {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #0096dd;
+  top:161px;**/
+  left:206px;**/
+  margin-left: -50px;
+}
+
+@-webkit-keyframes anir {
+  0% {-webkit-transform: scale(0.01); opacity: 0} 
+  1% {-webkit-transform: scale(0.01); opacity: 0.8} 
+  95% {-webkit-transform: scale(1); opacity: 0.8;}
+  100% {-webkit-transform: scale(1); opacity: 0;}
+}
+
+@keyframes anir {
+  0% {transform: scale(0.01); opacity: 0} 
+  1% {transform: scale(0.01); opacity: 0.8} 
+  95% {transform: scale(1); opacity: 0.8;}
+  100% {transform: scale(1); opacity: 0;}
+}
+
+#r2r { -webkit-animation-delay: -1s;animation-delay: -1s;}
+#r3r { -webkit-animation-delay: -2s;animation-delay: -2s;}
+#r4r { -webkit-animation-delay: -3s;animation-delay: -3s;}
+
+html{
+  overflow:hidden
+}
+
+body{
+  margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;
+  padding: 0;
+  color: black; font-size: 10pt; font-family: "Open Sans Light", sans-serif;
+  background-color: #B7BAD6;
+  overflow:hidden;
+}
+
+.maindiv {
+  text-align:center;
+  width:100vw;
+  height:80vh;
+  position:absolute;
+  display:none;
+}
+
+#speak { 
+      z-index:5;
+      position:relative;
+}
+
+@keyframes animateBorder {
+  to {
+    border-color: #EA3556;
+    box-shadow: 0 0 0 6px yellow;
+  }
+}
+
+.recording {
+        z-index:5;
+      position:relative;
+    border: 10px solid #4195fc;
+    border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+     /* make it glow! */
+    -webkit-box-shadow: 0px 0px 10px #4195fc;
+       -moz-box-shadow: 0px 0px 10px #4195fc;
+            box-shadow: 0px 0px 10px #4195fc;
+    animation: 1s animateBorder infinite;
+
+}
+
+.not-recording {
+  border: none;
+  z-index:5;
+  position:relative;
+}
+
+.optincard {
+  position:absolute;
+  display: inline-block;
+  margin-left: 7%;
+  margin-right:7%;
+  margin-top:20%;
+  width: 80%;
+  height: 60%;
+  background: #fff;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: medium;
+}
+
+.agreebtn {
+   border: 5px #0073aa;
+   background: #0096dd;
+   height:50px;
+   width:150px;
+   font-size: large;
+   color:white;
+   border-radius: 0px;
+   position:relative;
+   padding-top: 10px;
+}
+
+#divsendbtn{
+  display: none;
+}
+
+#fox {
+  background: #c13832;
+  border-bottom: 5px solid white;
+}
+
+#logo {
+  padding-bottom: 15px;
+}
+
+#mic {
+    position: absolute; 
+    bottom: 20%; 
+    padding-bottom: 10px;
+}
+
+#msgsamples {
+  padding-top: 10px;
+}
+
+#lblstatus {
+  background-color: white;
+  padding-top:20px;
+  padding-bottom:20px;
+  width:100%;
+  padding-right:20px;
+  padding-left:20px;
+  top:30px;
+}
+
+#clicktostop {
+  
+}
+
+
