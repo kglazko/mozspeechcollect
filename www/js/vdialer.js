@@ -8,11 +8,15 @@ var _stream;
 var recording_state = 0;
 var offline = true;
 var global_phrase;
-var audio_context = new AudioContext;
+var audio_context = AudioContext || window.webkitAudioContext;
 var recorder;
 var str_grm = "#JSGF V1.0; grammar test;  <numeros> =  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ; public <numbers> = <numeros>+;"
 var blob = null;
 localStorage.setItem("totalsamples", 0 );
+var getUserMedia = (navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
 
 // Wait for connection to BinaryJS server
 client.on('open', function(){
@@ -27,19 +31,19 @@ client.on('error', function(){
     alert("You have disconnected. Please, restart the application.");
 });
 
-navigator.mozGetUserMedia({audio: true},
-    function(stream){
+getUserMedia.call(navigator,{audio: true},successUM, errorUM);
+function successUM(stream){
         // if everything ok
         var options = {};
         _stream = stream;
         success_gum(_stream) ;
         nomike = false;
-    } ,
-    function(_error){
+    } 
+
+function errorUM(_error){
         if (error) error(_error)
         nomike = true;
     } 
-);
 
 function success_gum(stream){
     var input = audio_context.createMediaStreamSource(stream);

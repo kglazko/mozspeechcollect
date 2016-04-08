@@ -8,7 +8,7 @@ var _stream;
 var recording_state = 0;
 var offline = true;
 var global_phrase;
-var audio_context = new AudioContext;
+var audio_context = new webkitAudioContext();
 var recorder;
 var str_grm = "#JSGF V1.0; grammar test;  <numeros> =  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 ; public <numbers> = <numeros>+;"
 var blob = null;
@@ -27,19 +27,19 @@ client.on('error', function(){
     alert("You have disconnected. Please, restart the application.");
 });
 
-navigator.mozGetUserMedia({audio: true},
-    function(stream){
+    var p = navigator.mediaDevices.getUserMedia({audio: true});
+    p.then(function(stream){
         // if everything ok
         var options = {};
         _stream = stream;
         success_gum(_stream) ;
         nomike = false;
-    } ,
-    function(_error){
+    });
+    p.catch(function(_error){
         if (error) error(_error)
         nomike = true;
-    } 
-);
+    }); 
+
 
 function success_gum(stream){
     var input = audio_context.createMediaStreamSource(stream);
